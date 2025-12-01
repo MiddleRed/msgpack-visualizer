@@ -1,0 +1,4 @@
+{
+  "name": "Msgpack Visualizer",
+  "description": "A smart MessagePack visualizer and parser that automatically detects Hex, Base64, and Python-style byte strings, rendering them into an interactive, type-annotated JSON tree."
+}
