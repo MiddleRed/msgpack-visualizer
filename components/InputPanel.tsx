@@ -11,6 +11,20 @@ interface Props {
   detectedFormat?: InputFormat;
 }
 
+const PythonIcon = ({ size = 14 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+     <path d="M14.075 2.75H9.925C6.375 2.75 6 5.125 6 6.625V8.5h7V9.5H5.125C3.05 9.5 2 10.925 2 13V15.5C2 17.575 3.425 18.5 5.125 18.5h1.375v-1.875C6.5 14.55 7.95 13.5 10.025 13.5h2.475c2.075 0 3-0.925 3-3V6.625C15.5 4.55 16.15 2.75 14.075 2.75zm-4.75 4.125a0.875 0.875 0 1 1 0-1.75 0.875 0.875 0 0 1 0 1.75z" />
+     <path d="M9.925 21.25h4.15c3.55 0 3.925-2.375 3.925-3.875V15.5H11v-1h7.875c2.075 0 3.125-1.425 3.125-3.5V8.5c0-2.075-1.425-3-3.125-3H17.5v1.875c0 2.075-1.45 3.125-3.525 3.125H11.5c-2.075 0-3 0.925-3 3v3.875c0 2.075-0.65 3.875 1.425 3.875zm4.75-4.125a0.875 0.875 0 1 1 0 1.75 0.875 0.875 0 0 1 0-1.75z" />
+  </svg>
+);
+
+
 export const InputPanel: React.FC<Props> = ({ input, setInput, format, setFormat, error, detectedFormat }) => {
   
   const getPlaceholder = () => {
@@ -26,7 +40,7 @@ export const InputPanel: React.FC<Props> = ({ input, setInput, format, setFormat
     { id: InputFormat.AUTO, label: 'Auto', icon: <Terminal size={14} /> },
     { id: InputFormat.HEX, label: 'Hex', icon: <Hash size={14} /> },
     { id: InputFormat.BASE64, label: 'Base64', icon: <FileCode size={14} /> },
-    { id: InputFormat.PYTHON, label: 'Python', icon: <Binary size={14} /> },
+    { id: InputFormat.PYTHON, label: 'Python', icon: <PythonIcon size={14} /> },
   ];
 
   return (
