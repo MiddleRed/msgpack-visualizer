@@ -31,6 +31,7 @@ jobs:
         run: npm run build # 或 'yarn build'
         env:
           CI: false # 避免在构建过程中因 warnings 被视为 errors
+          VITE_BASE_URL: /msgpack-visualizer/ # 设置基础路径以匹配 GitHub Pages 的子路径
       
       # --- 部署到 GitHub Pages ---
       # 使用 peaceiris/actions-gh-pages 这个流行的 Action 进行部署
