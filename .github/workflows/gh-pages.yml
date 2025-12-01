@@ -1,0 +1,43 @@
+name: Deploy React App to GitHub Pages # Action 的名称
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - master # 当代码推送到 main 分支时触发此 Action
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 在最新的 Ubuntu 运行器上执行任务
+    
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4 # 检出仓库代码
+      
+      # --- Node.js 环境设置 ---
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 指定 Node.js 版本，建议使用 LTS 版本
+          cache: 'npm' # 或 'yarn'，取决于你使用的包管理器
+
+      # --- 安装依赖 ---
+      - name: 📦 Install Dependencies
+        run: npm install # 或 'yarn install'
+
+      # --- 构建 React 应用 ---
+      - name: 🔨 Build React Application
+        run: npm run build # 或 'yarn build'
+        env:
+          CI: false # 避免在构建过程中因 warnings 被视为 errors
+      
+      # --- 部署到 GitHub Pages ---
+      # 使用 peaceiris/actions-gh-pages 这个流行的 Action 进行部署
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 提供的默认 token
+          publish_dir: ./dist # 指定要部署的构建目录 (默认是 'build')
+          # 默认部署到 'gh-pages' 分支，GitHub Pages 会从这个分支提供服务
+          # publish_branch: gh-pages
